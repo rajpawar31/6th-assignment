@@ -1,0 +1,31 @@
+1.Create an schema name seriesdb with table director,country,genre,series?
+-->
+    CREATE DATABASE seriesdb;
+
+
+2. create table series with following columns :- name,genre,director,country,status,yor,yoe?
+-->
+create table series(sname VARCHAR(25) NOT NULL, genre VARCHAR(25), director VARCHAR(25), country VARCHAR(25), status VARCHAR(25), yor DATE, yoe DATE);
+
+
+3. Select series with director name,genre,country where country is USA and status is ended ?
+-->
+     SELECT director name, genre, country, 
+     FROM series
+     WHERE country ='USA' AND status ='ended';
+
+4.Select series which was telecasted between 2010 and 2021?
+-->
+     SELECT * FROM series
+     WHERE yoe BETWEEN 2010 AND 2021;
+
+
+5.Select series which was telecasted between 2000 and 2010?
+-->
+      
+     SELECT * FROM series
+     WHERE yoe BETWEEN 2000 AND 2010;
+
+
+
+

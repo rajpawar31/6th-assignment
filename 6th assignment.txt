@@ -1,0 +1,288 @@
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS >  \connect root@localhost:3306
+Creating a session to 'root@localhost:3306'
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 13
+Server version: 8.0.26 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  localhost:3306 ssl  SQL > SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| seriesdb           |
+| sys                |
+| world              |
++--------------------+
+6 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE TABLE director (id  INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > use seriesdb;
+Default schema set to `seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > CREATE TABLE director (id  INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+Query OK, 0 rows affected (0.4553 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > CREATE TABLE country (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL, PRIMARY KEY(id));
+Query OK, 0 rows affected (0.5675 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > CREATE TABLE genre (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+Query OK, 0 rows affected (0.4753 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > CREATE TABLE series (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256), genre INT NOT NULL,director INT NOT NULL, country INT NOT NULL, year_of_release DATE,year_of_end Date,PRIMARY KEY(id));
+Query OK, 0 rows affected (1.4621 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL >  describe director;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.3223 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe country;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.0026 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe genre;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(256) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.0925 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL >   insert into director(name) values ('CHRISTOPHER NOLAN');
+Query OK, 1 row affected (0.1154 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('DAVID FINCHER ');
+Query OK, 1 row affected (0.1409 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('QUENTIN TARANTINO ');
+Query OK, 1 row affected (0.0844 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('DAVID YATES ');
+Query OK, 1 row affected (0.1183 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('JAMES CAMERON');
+Query OK, 1 row affected (0.1045 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' PETER JACKSON');
+Query OK, 1 row affected (0.1062 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' CHRIS COLUMBBUS');
+Query OK, 1 row affected (0.1220 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('TIM BURTON');
+Query OK, 1 row affected (0.0992 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('STEVEN SPIELBERG');
+Query OK, 1 row affected (0.0897 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('DAVID FINCHER ');
+Query OK, 1 row affected (0.1720 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT * FROM director;
++----+--------------------+
+| id | name               |
++----+--------------------+
+|  1 | CHRISTOPHER NOLAN  |
+|  2 | DAVID FINCHER      |
+|  3 | QUENTIN TARANTINO  |
+|  4 | DAVID YATES        |
+|  5 | JAMES CAMERON      |
+|  6 |  PETER JACKSON     |
+|  7 |  CHRIS COLUMBBUS   |
+|  8 | TIM BURTON         |
+|  9 | STEVEN SPIELBERG   |
+| 10 | DAVID FINCHER      |
++----+--------------------+
+10 rows in set (0.0661 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Comedy');
+Query OK, 1 row affected (0.1732 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Thriller');
+Query OK, 1 row affected (0.1850 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Horror');
+Query OK, 1 row affected (0.0924 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Drama');
+Query OK, 1 row affected (0.1137 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL >
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT * from genre;
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Comedy   |
+|  2 | Thriller |
+|  3 | Horror   |
+|  4 | Drama    |
++----+----------+
+4 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('India');
+Query OK, 1 row affected (0.1510 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('ENGLAND');
+Query OK, 1 row affected (0.1145 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('USA');
+Query OK, 1 row affected (0.0829 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into country(name) values('EUROPE');
+Query OK, 1 row affected (0.0940 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT * FROM COUNTRY;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | India   |
+|  2 | ENGLAND |
+|  3 | USA     |
+|  4 | EUROPE  |
++----+---------+
+4 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL >  ALTER TABLE series ADD language VARCHAR(256);
+Query OK, 0 rows affected (1.6150 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD no_of_seasons VARCHAR(256);
+Query OK, 0 rows affected (0.6563 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(1,' The Dark Knight Rises',4,1,3,'2021-06-16','2021-06-16','ENGLISH','ended','one');
+ERROR: 1054 (42S22): Unknown column 'status' in 'field list'
+ MySQL  localhost:3306 ssl  seriesdb  SQL > ALTER TABLE series ADD status VARCHAR(256);
+Query OK, 0 rows affected (0.5800 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(1,' The Dark Knight Rises',4,1,3,'2021-06-16','2021-06-16','ENGLISH','ended','one');
+Query OK, 1 row affected (0.1039 sec)
+MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(2,'Fantastic Beasts',1,4,2,'2020-04-27','2021-07-15','English','ended','two');
+Query OK, 1 row affected (0.0950 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(3,'Money Heist',2,3,3,'2017-05-2','2021-12-3','Spanish','ended','two');
+Query OK, 1 row affected (0.1010 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(4,'The Walking Dead',3,9,2,'2010-10-31','2021-07-5','English','running','ten');
+Query OK, 1 row affected (0.1341 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(5,'The Modern Family',1,10,2,'2009-09-23','2020-04-8','English','ended','eleven');
+Query OK, 1 row affected (0.0906 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(6,'The Haunting Of Hill House',3,5,2,'1994-09-22','2021-02-21','English','renewed','one');
+Query OK, 1 row affected (0.1222 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(7,'Friends',1,4,2,'1994-09-22','2004-05-6','English','ended','Ten');
+Query OK, 1 row affected (0.0850 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(8,'Paatal Lok',2,7,1,'2020-05-15','2020-05-15','Hindi','ended','one');
+Query OK, 1 row affected (0.1471 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(9,'Sacred Games',2,8,1,'2018-07-5','2019-07-15','Hindi','ended','two');
+Query OK, 1 row affected (0.1118 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into series(id,name,genre,director,country,year_of_release,year_of_end,language,status,no_of_seasons) values(10,'Mr.Robot',4,6,2,'2015-06-24','2019-12-22','English','ended','four');
+Query OK, 1 row affected (0.1473 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from series;
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+| id | name                       | genre | director | country | year_of_release | year_of_end | language | no_of_seasons | status  |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+|  1 |  The Dark Knight Rises     |     4 |        1 |       3 | 2021-06-16      | 2021-06-16  | ENGLISH  | one           | ended   |
+|  2 | Fantastic Beasts           |     1 |        4 |       2 | 2020-04-27      | 2021-07-15  | English  | two           | ended   |
+|  3 | Money Heist                |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | two           | ended   |
+|  4 | The Walking Dead           |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | ten           | running |
+|  5 | The Modern Family          |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | eleven        | ended   |
+|  6 | The Haunting Of Hill House |     3 |        5 |       2 | 1994-09-22      | 2021-02-21  | English  | one           | renewed |
+|  7 | Friends                    |     1 |        4 |       2 | 1994-09-22      | 2004-05-06  | English  | Ten           | ended   |
+|  8 | Paatal Lok                 |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | one           | ended   |
+|  9 | Sacred Games               |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | two           | ended   |
+| 10 | Mr.Robot                   |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | four          | ended   |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+10 rows in set (0.0009 sec)
+
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT name, director,genre,country from series WHERE country='USA' AND status='ended';
+Empty set, 1 warning (0.0404 sec)
+Warning (code 1292): Truncated incorrect DOUBLE value: 'USA'
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT name, director,genre,country from series WHERE country=2 AND status='ended';
++-------------------+----------+-------+---------+
+| name              | director | genre | country |
++-------------------+----------+-------+---------+
+| Fantastic Beasts  |        4 |     1 |       2 |
+| The Modern Family |       10 |     1 |       2 |
+| Friends           |        4 |     1 |       2 |
+| Mr.Robot          |        6 |     4 |       2 |
++-------------------+----------+-------+---------+
+4 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select name, director,genre,country from series WHERE country=2 OR status='ended';
++----------------------------+----------+-------+---------+
+| name                       | director | genre | country |
++----------------------------+----------+-------+---------+
+|  The Dark Knight Rises     |        1 |     4 |       3 |
+| Fantastic Beasts           |        4 |     1 |       2 |
+| Money Heist                |        3 |     2 |       3 |
+| The Walking Dead           |        9 |     3 |       2 |
+| The Modern Family          |       10 |     1 |       2 |
+| The Haunting Of Hill House |        5 |     3 |       2 |
+| Friends                    |        4 |     1 |       2 |
+| Paatal Lok                 |        7 |     2 |       1 |
+| Sacred Games               |        8 |     2 |       1 |
+| Mr.Robot                   |        6 |     4 |       2 |
++----------------------------+----------+-------+---------+
+10 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT name, director,genre,country,status from series WHERE country=2 OR status='ended';
++----------------------------+----------+-------+---------+---------+
+| name                       | director | genre | country | status  |
++----------------------------+----------+-------+---------+---------+
+|  The Dark Knight Rises     |        1 |     4 |       3 | ended   |
+| Fantastic Beasts           |        4 |     1 |       2 | ended   |
+| Money Heist                |        3 |     2 |       3 | ended   |
+| The Walking Dead           |        9 |     3 |       2 | running |
+| The Modern Family          |       10 |     1 |       2 | ended   |
+| The Haunting Of Hill House |        5 |     3 |       2 | renewed |
+| Friends                    |        4 |     1 |       2 | ended   |
+| Paatal Lok                 |        7 |     2 |       1 | ended   |
+| Sacred Games               |        8 |     2 |       1 | ended   |
+| Mr.Robot                   |        6 |     4 |       2 | ended   |
++----------------------------+----------+-------+---------+---------+
+10 rows in set (0.0005 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT name, director,genre,country,status from series WHERE country=2 AND status='ended';
++-------------------+----------+-------+---------+--------+
+| name              | director | genre | country | status |
++-------------------+----------+-------+---------+--------+
+| Fantastic Beasts  |        4 |     1 |       2 | ended  |
+| The Modern Family |       10 |     1 |       2 | ended  |
+| Friends           |        4 |     1 |       2 | ended  |
+| Mr.Robot          |        6 |     4 |       2 | ended  |
++-------------------+----------+-------+---------+--------+
+4 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT *from series
+                                         -> WHERE year_of_release BETWEEN '2010-10-31' AND '2021-07-05';
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+| id | name                   | genre | director | country | year_of_release | year_of_end | language | no_of_seasons | status  |
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+|  1 |  The Dark Knight Rises |     4 |        1 |       3 | 2021-06-16      | 2021-06-16  | ENGLISH  | one           | ended   |
+|  2 | Fantastic Beasts       |     1 |        4 |       2 | 2020-04-27      | 2021-07-15  | English  | two           | ended   |
+|  3 | Money Heist            |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | two           | ended   |
+|  4 | The Walking Dead       |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | ten           | running |
+|  8 | Paatal Lok             |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | one           | ended   |
+|  9 | Sacred Games           |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | two           | ended   |
+| 10 | Mr.Robot               |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | four          | ended   |
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+7 rows in set (0.0508 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT *from series WHERE year_of_release BETWEEN '2010-10-31' AND '2021-07-05';
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+| id | name                   | genre | director | country | year_of_release | year_of_end | language | no_of_seasons | status  |
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+|  1 |  The Dark Knight Rises |     4 |        1 |       3 | 2021-06-16      | 2021-06-16  | ENGLISH  | one           | ended   |
+|  2 | Fantastic Beasts       |     1 |        4 |       2 | 2020-04-27      | 2021-07-15  | English  | two           | ended   |
+|  3 | Money Heist            |     2 |        3 |       3 | 2017-05-02      | 2021-12-03  | Spanish  | two           | ended   |
+|  4 | The Walking Dead       |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | ten           | running |
+|  8 | Paatal Lok             |     2 |        7 |       1 | 2020-05-15      | 2020-05-15  | Hindi    | one           | ended   |
+|  9 | Sacred Games           |     2 |        8 |       1 | 2018-07-05      | 2019-07-15  | Hindi    | two           | ended   |
+| 10 | Mr.Robot               |     4 |        6 |       2 | 2015-06-24      | 2019-12-22  | English  | four          | ended   |
++----+------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+7 rows in set (0.0005 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > SELECT *from series WHERE year_of_release BETWEEN '1994-09-22' AND '2010-10-31';
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+| id | name                       | genre | director | country | year_of_release | year_of_end | language | no_of_seasons | status  |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+|  4 | The Walking Dead           |     3 |        9 |       2 | 2010-10-31      | 2021-07-05  | English  | ten           | running |
+|  5 | The Modern Family          |     1 |       10 |       2 | 2009-09-23      | 2020-04-08  | English  | eleven        | ended   |
+|  6 | The Haunting Of Hill House |     3 |        5 |       2 | 1994-09-22      | 2021-02-21  | English  | one           | renewed |
+|  7 | Friends                    |     1 |        4 |       2 | 1994-09-22      | 2004-05-06  | English  | Ten           | ended   |
++----+----------------------------+-------+----------+---------+-----------------+-------------+----------+---------------+---------+
+4 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL >
